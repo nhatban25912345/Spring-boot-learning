@@ -3,8 +3,6 @@ package org.example.springbootlearning.controller;
 import lombok.AllArgsConstructor;
 import org.example.springbootlearning.dto.EmployeeDto;
 import org.example.springbootlearning.service.EmployeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
 
-    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
     private EmployeeService employeeService;
 
     //  build add employee api
@@ -34,8 +31,8 @@ public class EmployeeController {
 
     @GetMapping("/all-employee")
     public ResponseEntity<List<EmployeeDto>> getAllEmployee(){
-        List<EmployeeDto> employeeDtos = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employeeDtos);
+        List<EmployeeDto> listEmployeeDto = employeeService.getAllEmployees();
+        return ResponseEntity.ok(listEmployeeDto);
     }
 
     @PostMapping("/employee/{id}")
