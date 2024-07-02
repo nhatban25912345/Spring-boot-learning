@@ -1,15 +1,13 @@
 package org.example.springbootlearning.modal.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -27,5 +25,8 @@ public class Employee {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "avatar")
+    private String avatar;
 
 }

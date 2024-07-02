@@ -1,12 +1,13 @@
 package org.example.springbootlearning.controller;
 
 import lombok.AllArgsConstructor;
-import org.example.springbootlearning.dto.EmployeeDto;
+import org.example.springbootlearning.dto.EmployeeDTO;
 import org.example.springbootlearning.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,30 +15,33 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     //  build add employee api
     @PostMapping("/create-employee")
-    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto){
-        EmployeeDto saveEmployee = employeeService.createEmployee(employeeDto);
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody @Valid EmployeeDTO employeeDto){
+        EmployeeDTO saveEmployee = employeeService.createEmployee(employeeDto);
         return new ResponseEntity<>(saveEmployee, HttpStatus.CREATED);
     }
 
     @GetMapping("/employee/{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId){
-        EmployeeDto employeeDto= employeeService.getEmployeeById(employeeId);
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long employeeId){
+        EmployeeDTO employeeDto= employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok(employeeDto);
     }
 
     @GetMapping("/all-employee")
-    public ResponseEntity<List<EmployeeDto>> getAllEmployee(){
-        List<EmployeeDto> listEmployeeDto = employeeService.getAllEmployees();
-        return ResponseEntity.ok(listEmployeeDto);
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployee(){
+        List<EmployeeDTO> listEmployeeDTO = employeeService.getAllEmployees();
+        return ResponseEntity.ok(listEmployeeDTO);
     }
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employeeUpdate){
-        EmployeeDto employeeDto = employeeService.updateEmployee(id, employeeUpdate);
+    public ResponseEntity<EmployeeDTO> updateEmployee(
+            @PathVariable Long id,
+            @RequestBody @Valid EmployeeDTO employeeUpdate
+    ) {
+        EmployeeDTO employeeDto = employeeService.updateEmployee(id, employeeUpdate);
         return ResponseEntity.ok(employeeDto);
     }
 

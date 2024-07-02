@@ -1,17 +1,17 @@
 package org.example.springbootlearning.service;
 
-import org.example.springbootlearning.dto.EmployeeDto;
+import org.example.springbootlearning.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
-    EmployeeDto createEmployee(EmployeeDto employeeDto);
+    EmployeeDTO createEmployee(EmployeeDTO employeeDto);
 
-    EmployeeDto getEmployeeById(Long id);
+    EmployeeDTO getEmployeeById(Long id);
 
-    List<EmployeeDto> getAllEmployees();
+    List<EmployeeDTO> getAllEmployees();
 
-    EmployeeDto updateEmployee(Long id, EmployeeDto employeeUpdate);
+    EmployeeDTO updateEmployee(Long id, EmployeeDTO employeeUpdate);
 
     void deleteEmployee(Long id);
 }
