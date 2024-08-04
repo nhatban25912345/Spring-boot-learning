@@ -2,7 +2,6 @@ package org.example.springbootlearning.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.springbootlearning.dto.EmployeeDTO;
 import org.example.springbootlearning.exception.ResourceNotFoundException;
@@ -24,11 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public EmployeeDTO createEmployee(EmployeeDTO employeeDto){
-        Employee employee = EmployeeMapper.maptoEmployee(employeeDto);
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO){
+        Employee employee = EmployeeMapper.maptoEmployee(employeeDTO);
         employeeRepository.save(employee);
 
-        return employeeDto;
+        return employeeDTO;
     }
 
     @Override

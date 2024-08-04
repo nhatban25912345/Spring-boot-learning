@@ -3,6 +3,8 @@ package org.example.springbootlearning.controller;
 import lombok.AllArgsConstructor;
 import org.example.springbootlearning.dto.EmployeeDTO;
 import org.example.springbootlearning.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
 
+    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
     private final EmployeeService employeeService;
 
     //  build add employee api
@@ -31,7 +34,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/all-employee")
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployee(){
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployee(@RequestHeader("Authorization") String authorizationHeader){
+        log.info("authorizationHeader: {}", authorizationHeader);
         List<EmployeeDTO> listEmployeeDTO = employeeService.getAllEmployees();
         return ResponseEntity.ok(listEmployeeDTO);
     }
